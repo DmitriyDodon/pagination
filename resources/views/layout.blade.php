@@ -23,6 +23,12 @@
     @yield('content')
 </div>
 
+<div class="container-fluid" align="center">
+    @yield('pages')
+</div>
+
+
+
 
 </body>
 </html>

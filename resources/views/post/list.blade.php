@@ -62,47 +62,11 @@
     </div>
 
 
-    @if($posts->currentPage() > 1 )
-        <a href="/post/{{ $posts->previousPageUrl() }}"> Prev </a>
-    @endif
-
-    @foreach($posts->getUrlRange($posts->currentPage()-1 , $posts->currentPage()+1) as $num => $link)
-
-
-        @if($loop->first && $num >= 2)
-            <a href="/post/{{ $posts->url(1) }}"> {{ 1 }} </a>
-        @endif
-
-        @if($num >= 3 && $loop->first)
-            ...
-        @endif
-
-
-        @if($num > 0 && $num <= $posts->lastPage())
-            <a href="/post/{{ $link }}"> {{ $num }} </a>
-        @endif
-
-
-        @if($num == 2 && $loop->last)
-            <a href="/post/{{ $posts->url($posts->currentPage() + 2) }}"> {{ $posts->currentPage() + 2 }} </a>
-        @endif
-
-        @if($num+1 < $posts->lastPage() && $loop->last)
-            ...
-        @endif
-        @if($loop->last && $num < $posts->lastPage())
-            <a href="/post/{{ $posts->url($posts->lastPage()) }}"> {{ $posts->lastPage()}} </a>
-        @endif
-
-
-    @endforeach
-
-
-    @if($posts->currentPage() !== $posts->lastPage())
-        <a href="/post/{{ $posts->nextPageUrl() }}"> Next </a>
-    @endif
-
-
     @unset($_SESSION['message'])
+@endsection
+
+
+@section('pages')
+    {{ view('pagination' , compact('posts')) }}
 @endsection
 

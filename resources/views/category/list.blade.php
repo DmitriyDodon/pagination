@@ -55,47 +55,53 @@
         </table>
     </div>
 
-    @if($categories->currentPage() > 1 )
-        <a href="{{ $categories->previousPageUrl() }}"> Prev </a>
-    @endif
-
-    @foreach($categories->getUrlRange($categories->currentPage()-1 , $categories->currentPage()+1) as $num => $link)
 
 
-        @if($loop->first && $num >= 2)
-            <a href="{{ $categories->url(1) }}"> {{ 1 }} </a>
-        @endif
 
-        @if($num >= 3 && $loop->first)
-            ...
-        @endif
+{{--    @if($categories->currentPage() > 1 )--}}
+{{--        <a href="{{ $categories->previousPageUrl() }}"> Prev </a>--}}
+{{--    @endif--}}
 
-
-        @if($num > 0 && $num <= $categories->lastPage())
-            <a href="/category/{{ $link }}"> {{ $num }} </a>
-        @endif
+{{--    @foreach($categories->getUrlRange($categories->currentPage()-1 , $categories->currentPage()+1) as $num => $link)--}}
 
 
-        @if($num == 2 && $loop->last)
-            <a href="{{ $categories->url($categories->currentPage() + 2) }}"> {{ $categories->currentPage() + 2 }} </a>
-        @endif
+{{--        @if($loop->first && $num >= 2)--}}
+{{--            <a href="{{ $categories->url(1) }}"> {{ 1 }} </a>--}}
+{{--        @endif--}}
 
-        @if($num+1 < $categories->lastPage() && $loop->last)
-            ...
-        @endif
-        @if($loop->last && $num < $categories->lastPage())
-            <a href="{{ $categories->url($categories->lastPage()) }}"> {{ $categories->lastPage()}} </a>
-        @endif
+{{--        @if($num >= 3 && $loop->first)--}}
+{{--            ...--}}
+{{--        @endif--}}
 
 
-    @endforeach
+{{--        @if($num > 0 && $num <= $categories->lastPage())--}}
+{{--            <a href="/category/{{ $link }}"> {{ $num }} </a>--}}
+{{--        @endif--}}
 
 
-    @if($categories->currentPage() !== $categories->lastPage())
-        <a href="{{ $categories->nextPageUrl() }}"> Next </a>
-    @endif
+{{--        @if($num == 2 && $loop->last)--}}
+{{--            <a href="{{ $categories->url($categories->currentPage() + 2) }}"> {{ $categories->currentPage() + 2 }} </a>--}}
+{{--        @endif--}}
+
+{{--        @if($num+1 < $categories->lastPage() && $loop->last)--}}
+{{--            ...--}}
+{{--        @endif--}}
+{{--        @if($loop->last && $num < $categories->lastPage())--}}
+{{--            <a href="{{ $categories->url($categories->lastPage()) }}"> {{ $categories->lastPage()}} </a>--}}
+{{--        @endif--}}
+
+{{--    @endforeach--}}
+
+
+{{--    @if($categories->currentPage() !== $categories->lastPage())--}}
+{{--        <a href="{{ $categories->nextPageUrl() }}"> Next </a>--}}
+{{--    @endif--}}
 
 
     @unset($_SESSION['message'])
+@endsection
+
+@section('pages')
+{{ view('pagination' , compact('categories')) }}
 @endsection
 

@@ -53,47 +53,12 @@
         </table>
     </div>
 
-    @if($tags->currentPage() > 1 )
-        <a href="/tag/{{ $tags->previousPageUrl() }}"> Prev </a>
-    @endif
-
-    @foreach($tags->getUrlRange($tags->currentPage()-1 , $tags->currentPage()+1) as $num => $link)
-
-
-        @if($loop->first && $num >= 2)
-            <a href="/tag/{{ $tags->url(1) }}"> {{ 1 }} </a>
-        @endif
-
-        @if($num >= 3 && $loop->first)
-            ...
-        @endif
-
-
-        @if($num > 0 && $num <= $tags->lastPage())
-            <a href="/tag/{{ $link }}"> {{ $num }} </a>
-        @endif
-
-
-        @if($num == 2 && $loop->last)
-            <a href="/tag/{{ $tags->url($tags->currentPage() + 2) }}"> {{ $tags->currentPage() + 2 }} </a>
-        @endif
-
-        @if($num+1 < $tags->lastPage() && $loop->last)
-            ...
-        @endif
-        @if($loop->last && $num < $tags->lastPage())
-            <a href="/tag/{{ $tags->url($tags->lastPage()) }}"> {{ $tags->lastPage()}} </a>
-        @endif
-
-
-    @endforeach
-
-
-    @if($tags->currentPage() !== $tags->lastPage())
-        <a href="/tag/{{ $tags->nextPageUrl() }}"> Next </a>
-    @endif
-    
     
     @unset($_SESSION['message'])
+@endsection
+
+
+@section('pages')
+    {{ view('pagination' , compact('tags')) }}
 @endsection
 
